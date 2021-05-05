@@ -176,7 +176,7 @@ def InsertNotification():
 @main.route('/get_notifications')
 def GetNotifications():
     my_id = request.args.get('my_id')
-    notifications_sql =  text("SELECT * from notification LEFT join users on user_id=reciever where reciever="+str(my_id))
+    notifications_sql =  text("SELECT * from notification LEFT join users on user_id=created_by where reciever="+str(my_id))
     notifications_query = db.engine.execute(notifications_sql)
     notifications_schema = NotificationsSchema(many=True)
     notifications = notifications_schema.dump(notifications_query)
